@@ -345,5 +345,4 @@ function resetForm() {
 
 function showSpinner(show) {
     loadingSpinner.style.display = show ? 'block' : 'none';
-
 }
