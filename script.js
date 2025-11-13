@@ -1,4 +1,4 @@
-// ---- CONFIGURATION ----
+// ---- CONFIGURATION. ----
 // 1. PASTE YOUR CLIENT ID FROM PHASE 2
 const GOOGLE_CLIENT_ID = "http://430347559692-d3ke13qu1p6edd65hdreiubuia0q8jgk.apps.googleusercontent.com"; 
 
