@@ -1,12 +1,11 @@
 // ---- CONFIGURATION ----
-// 1. PASTE YOUR WEB APP URL FROM PHASE 4
+// Your Web App URL is already here
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKztf0c0QLxdUoK7FckpprE6xR0-5oreRc5I4IX6IQibX9kgMxZwmsmq36Loaww94P/exec";
 // -----------------------
 
 // Global variables for auth
 let loggedInUser = null;
-let loggedInPassword = null; // Storing password is not secure, but required by this plan
-
+let loggedInPassword = null; 
 let productList = [];
 
 // DOM Elements
@@ -16,9 +15,8 @@ const loginButton = document.getElementById('login-button');
 const loginUsernameEl = document.getElementById('login-username');
 const loginPasswordEl = document.getElementById('login-password');
 const loginErrorEl = document.getElementById('login-error');
-
 const loadingSpinner = document.getElementById('loading-spinner');
-const userEmailEl = document.getElementById('user-email'); // Will show username
+const userEmailEl = document.getElementById('user-email');
 const logoutButton = document.getElementById('logout-button');
 const invoiceIdEl = document.getElementById('invoice-id');
 const invoiceDateEl = document.getElementById('invoice-date');
@@ -34,10 +32,8 @@ const newProductModal = document.getElementById('new-product-modal');
 const closeModalButton = document.getElementById('close-modal-button');
 const saveNewProductButton = document.getElementById('save-new-product-button');
 
-
 // --- INITIALIZATION ---
 
-// Add event listeners
 document.addEventListener('DOMContentLoaded', () => {
     loginButton.addEventListener('click', handleLogin);
     logoutButton.addEventListener('click', handleSignOut);
@@ -83,7 +79,7 @@ async function handleLogin() {
         if (data.status === 'success') {
             // LOGIN SUCCESSFUL
             loggedInUser = data.user;
-            loggedInPassword = password; // Store password for future requests
+            loggedInPassword = password; // Store password
             
             userEmailEl.textContent = loggedInUser;
             loginScreen.style.display = 'none';
@@ -118,9 +114,7 @@ function handleSignOut() {
 
 // --- DATA FETCHING (from Google Apps Script) ---
 
-// Helper function for all server calls
 async function callGoogleScript(action, payload = {}) {
-    // Check if logged in
     if (!loggedInUser || !loggedInPassword) {
         alert("You are not logged in.");
         handleSignOut();
@@ -156,7 +150,7 @@ async function callGoogleScript(action, payload = {}) {
         alert('An error occurred: ' + error.message);
         showSpinner(false);
         if (error.message.includes("User not authorized")) {
-            handleSignOut(); // Log out unauthorized user
+            handleSignOut();
         }
     }
 }
@@ -167,19 +161,14 @@ async function getInitialAppData() {
     if (data) {
         productList = data.products;
         invoiceIdEl.value = data.invoiceNumber;
-        
-        // Create the datalist for product autocomplete
         createProductDatalist();
-        
-        // Add one blank item row to start
         addLineItem();
     }
 }
 
-// Creates the <datalist> element for product autocomplete
 function createProductDatalist() {
     let datalist = document.getElementById('product-list');
-    if (datalist) datalist.remove(); // Remove old one
+    if (datalist) datalist.remove(); 
     
     datalist = document.createElement('datalist');
     datalist.id = 'product-list';
@@ -312,13 +301,13 @@ async function saveBill() {
         
         if (description && quantity > 0 && unitPrice > 0) {
             bill.items.push({ description, quantity, unitPrice });
-        } else if (description || quantity > 1 || unitPrice > 0) {
+        } else if (description || (quantity > 1 && quantity != "") || unitPrice > 0) {
             itemsValid = false;
         }
     });
 
     if (!itemsValid || bill.items.length === 0) {
-        alert("Please make sure all item rows are filled correctly.");
+        alert("Please make sure all item rows are filled correctly (Description, Qty, and Price).");
         return;
     }
 
