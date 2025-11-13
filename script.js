@@ -1,6 +1,6 @@
 // ---- CONFIGURATION ----
 // 1. PASTE YOUR WEB APP URL FROM PHASE 4
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzRvc4QpF3KRKV9DqE7Z3rAk9AKP--5ykSeXSXO41i0N25LM5zjCenRWwKZn9DxmOdY/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxKztf0c0QLxdUoK7FckpprE6xR0-5oreRc5I4IX6IQibX9kgMxZwmsmq36Loaww94P/exec";
 // -----------------------
 
 // Global variables for auth
@@ -345,4 +345,5 @@ function resetForm() {
 
 function showSpinner(show) {
     loadingSpinner.style.display = show ? 'block' : 'none';
+
 }
